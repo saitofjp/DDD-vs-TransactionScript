@@ -3,7 +3,9 @@ package com.example.demo.controller;
 import com.example.demo.controller.model.OrderRequest;
 import com.example.demo.controller.model.OrderResponse;
 import com.example.demo.data.model.Order;
+import com.example.demo.exception.AppException;
 import com.example.demo.service.OrderService;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,20 +31,18 @@ public class OrderController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public OrderResponse createEmployee(@RequestBody OrderRequest request) {
+    public OrderResponse createEmployee(@RequestBody OrderRequest request) throws AppException {
         return orderService.order(request);
     }
 
     @GetMapping
     public List<Order> getAllEmployees() {
-        return orderService.getOrders();
+        return new ArrayList<>();
     }
 
     @GetMapping("{id}")
     public ResponseEntity<Order> getEmployeeById(@PathVariable("id") long employeeId) {
-        return orderService.getEmployeeById(employeeId)
-            .map(ResponseEntity::ok)
-            .orElseGet(() -> ResponseEntity.notFound().build());
+        return null;
     }
 }
 
